@@ -35,7 +35,7 @@ Este paso requiere la creación de una base de datos en Azure:
     |---|---|
     | Oferta gratuita sin servidor | Aplicación de la oferta |
     | Subscription | Su suscripción |
-    | Resource group | Seleccione o cree un grupo de recursos nuevo. |
+    | Resource group | Selecciona o crea un nuevo grupo de recursos |
     | Nombre de la base de datos | **MyDB** |
     | Server | Selecciona o crea un nuevo servidor |
     | Método de autenticación | Autenticación de SQL |
@@ -81,8 +81,8 @@ Para comenzar, crearemos una cuenta de Azure Storage.
     | Configuración | Valor |
     |---|---|
     | Suscripción | Su suscripción |
-    | Resource group | Seleccione o cree un grupo de recursos nuevo. |
-    | Nombre de la cuenta de almacenamiento | Elige un nombre único global |
+    | Resource group | Selecciona o crea un nuevo grupo de recursos |
+    | Nombre de cuenta de almacenamiento | Elige un nombre único global |
     | Region | Elija la región más cercana a la suya. |
     | Servicio principal | **Azure Blob Storage o Azure Data Lake Storage Gen 2** |
     | Rendimiento | Estándar |
@@ -151,7 +151,7 @@ Es necesario empezar creando una **clave maestra** y una **credencial con ámbit
     SECRET = '<your-sas-token>';
     ```
 
-    Reemplaza ***<your-sas-token>*** con el **token de SAS de blob** generado anteriormente.
+    Reemplaza <your-sas-token> con el token de SAS de blob generado anteriormente.
 
 1. Por último, necesitas un **origen de datos** para acceder al Azure Blob Storage. Ejecuta el siguiente comando SQL para crear un **origen de datos**:
 
@@ -164,7 +164,7 @@ Es necesario empezar creando una **clave maestra** y una **credencial con ámbit
     );
     ```
 
-    Reemplaza ***<your-storage-account-name>*** por el nombre de tu cuenta de Azure Storage.
+    Reemplaza <your-storage-account-name> por el nombre de tu cuenta de Azure Storage.
 
 Ya está todo listo para importar los datos del archivo **employees.json** a la *Azure SQL Database*.
 
