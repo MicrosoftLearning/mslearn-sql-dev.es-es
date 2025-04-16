@@ -151,7 +151,7 @@ Es necesario empezar creando una **clave maestra** y una **credencial con ámbit
     SECRET = '<your-sas-token>';
     ```
 
-    Reemplaza <your-sas-token> con el token de SAS de blob generado anteriormente.
+    Reemplaza \<your-sas-token\> con el token de SAS de blob generado anteriormente.
 
 1. Por último, necesitas un **origen de datos** para acceder al Azure Blob Storage. Ejecuta el siguiente comando SQL para crear un **origen de datos**:
 
@@ -164,7 +164,7 @@ Es necesario empezar creando una **clave maestra** y una **credencial con ámbit
     );
     ```
 
-    Reemplaza <your-storage-account-name> por el nombre de tu cuenta de Azure Storage.
+    Reemplaza \<your-storage-account-name\> por el nombre de la cuenta de Azure Storage.
 
 Ya está todo listo para importar los datos del archivo **employees.json** a la *Azure SQL Database*.
 
@@ -383,7 +383,7 @@ Es hora de implementar la aplicación de funciones Azure en Azure.
 
     Reemplaza ***<your-function-app-name>*** por el nombre de tu aplicación de funciones de Azure.
 
-1. Espere a que la implementación se complete.
+1. Espera a que la implementación se complete.
 
 ### Obtención de la dirección URL de la aplicación de funciones de Azure
 
