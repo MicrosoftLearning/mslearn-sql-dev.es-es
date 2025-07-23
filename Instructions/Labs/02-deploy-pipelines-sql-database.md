@@ -62,7 +62,7 @@ Después, debes crear un nuevo repositorio de GitHub.
 1. Ve a **Repositorios** en tu cuenta y selecciona **Nuevo**.
 1. Selecciona tu cuenta en **Propietario**. Escribe el nombre **my-sql-db-repo**.
 1. Establece el repositorio en **Privado**.
-1. Seleccione **Create repository** (Crear repositorio).
+1. Seleccione **Crear repositorio**.
 
 ### Instalación de las extensiones de Visual Studio Code y clonación del repositorio
 
@@ -173,6 +173,7 @@ Acciones de GitHub te permite automatizar, personalizar y ejecutar tus flujos de
 1. Selecciona el vínculo **Configurar un flujo de trabajo usted mismo**.
 1. Copia el siguiente código en tu archivo **main.yml**. El código incluye los pasos para compilar e implementar el proyecto de base de datos.
 
+    {% raw %}
     ```yaml
     name: Build and Deploy SQL Database Project
     on:
@@ -208,8 +209,9 @@ Acciones de GitHub te permite automatizar, personalizar y ejecutar tus flujos de
               action: 'publish'
               build-arguments: '-c Release'
               arguments: '/p:DropObjectsNotInSource=true'  # Optional: Customize as needed
-      ```
-
+    ```
+    {% endraw %}
+   
       El paso **Compilar e implementar un proyecto de SQL** de tu archivo YAML se conecta a tu base de datos Azure SQL Database mediante la cadena de conexión almacenada en el secreto `AZURE_CONN_STRING`. La acción especifica la ruta de acceso al archivo de proyecto de SQL, establece la acción que se va a publicar para implementar el proyecto e incluye argumentos de compilación que se van a compilar en modo de versión. Además, usa el argumento `/p:DropObjectsNotInSource=true` para garantizar que cualquier objeto que no esté presente en el origen se quite de la base de datos de destino durante la implementación.
 
 1. Confirma los cambios.
