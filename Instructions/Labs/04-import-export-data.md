@@ -27,6 +27,7 @@ Comencemos configurando los recursos necesarios para este laboratorio, incluyend
 
 Este paso requiere la creación de una base de datos en Azure:
 
+1. Inicie sesión en [Azure Portal](https://portal.azure.com?azure-portal=true).
 1. En Azure Portal, ve a la página **Bases de datos SQL**.
 1. Seleccione **Crear**.
 1. Rellene los campos obligatorios:
@@ -35,20 +36,21 @@ Este paso requiere la creación de una base de datos en Azure:
     |---|---|
     | Oferta gratuita sin servidor | Aplicación de la oferta |
     | Subscription | Su suscripción |
-    | Resource group | Selecciona o crea un nuevo grupo de recursos |
+    | Resource group | *Selecciona o crea un nuevo grupo de recursos* |
     | Nombre de la base de datos | **MyDB** |
-    | Server | Selecciona o crea un nuevo servidor |
+    | Server | *Selecciona el vínculo **Crear nuevo*** |
+    | Nombre del servidor | *Elija un nombre único* |
+    | Location | *Seleccionar una ubicación* |
     | Método de autenticación | Autenticación de SQL |
     | Inicio de sesión de administrador de servidor | **sqladmin** |
-    | Contraseña | Escribe una contraseña segura |
-    | Confirmar contraseña | Confirmación de la contraseña |
+    | Contraseña | *Escribe una contraseña segura* |
+    | Confirmar contraseña | *Confirma la contraseña* |
 
 1. Seleccione **Revisar y crear** y, a continuación, **Crear**.
 1. Una vez finalizada la implementación, ve a la sección **Redes** de tu ***Azure SQL Server*** (no a la Azure SQL Database) y:
     1. Agrega tu dirección IP a las reglas de firewall. Esto te permitirá usar SQL Server Management Studio (SSMS) o Azure Data Studio para administrar la base de datos.
     1. Active la casilla **Permitir que los servicios y recursos de Azure accedan a este servidor**. Esto permitirá que la aplicación de Azure Function acceda al servidor de bases de datos.
     1. Guarda los cambios.
-1. Ve a la sección **Microsoft Entra ID** de tu **Azure SQL Server** y asegúrate de *anular la selección* de **Admitir solo la autenticación de Microsoft Entra para este servidor** y **Guardar** los cambios si se han seleccionado. En este ejemplo se usa la autenticación de SQL, por lo que es necesario deshabilitar la compatibilidad solo con Entra.
 
 > [!NOTE]
 > En un entorno de producción, deberás determinar a qué tipo de acceso quieres y desde dónde deseas conceder acceso. Aunque la función tenga un ligero cambio si eliges solo la autenticación Entra, ten en cuenta que aún necesitarás habilitar *Permitir que los servicios y recursos de Azure accedan a este servidor* para permitir que la aplicación de Azure Function acceda al servidor.
@@ -231,7 +233,7 @@ Comencemos por crear una aplicación de Azure Function en Visual Studio Code:
     $functionappname = "YourUniqueFunctionAppName"
     $resourcegroup = "YourResourceGroupName"
     $location = "YourLocation"
-    # NOTE - The following should be a new storage account name where your Azure function will resided.
+    # NOTE - The following should be a new storage account name where your Azure function will reside.
     # It should not be the same Storage Account name used to store the JSON file
     $storageaccount = "YourStorageAccountName"
 

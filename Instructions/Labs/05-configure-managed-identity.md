@@ -17,6 +17,7 @@ Este ejercicio debería tardar en completarse **30** minutos aproximadamente.
 Antes de empezar este ejercicio, necesitas:
 
 - Una suscripción a Azure con los permisos adecuados para crear y administrar recursos.
+- [**SQL Server Management Studio (SSMS)**](https://learn.microsoft.com/en-us/ssms/install/install) instalado en el equipo.
 - [**Visual Studio Code**](https://code.visualstudio.com/download?azure-portal=true) instalado en tu equipo con la siguiente extensión instalada:
     - [Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice?azure-portal=true).
 
@@ -28,26 +29,29 @@ En primer lugar, crearemos una aplicación web y una Azure SQL Database.
 1. Busca **Suscripciones** y selecciónalo.
 1. Ve a **Proveedores de recursos** en **Configuración**, busca el proveedor **Microsoft.Sql** y selecciona **Registrar**.
 1. Vuelve a la página principal de Azure Portal, selecciona **Crear un recurso**.
-1. Busca **Aplicación web + base de datos** y selecciónala.
+1. Busca la **aplicación web** y selecciónala.
 1. Selecciona **Crear** y rellena los detalles requeridos:
 
     | Grupo | Configuración | Valor |
     | --- | --- | --- |
     | **Detalles del proyecto** | **Suscripción** | Seleccione la suscripción a Azure. |
-    | **Detalles del proyecto** | **Grupo de recursos** | Seleccione o cree un grupo de recursos nuevo. |
-    | **Detalles del proyecto** | **Región** | Selecciona la región donde quieres hospedar tu aplicación web |
-    | **Detalles de la aplicación web** | **Nombre** | Escriba un nombre único para la aplicación web |
-    | **Detalles de la aplicación web** | **Pila en tiempo de ejecución** | .NET 8 (LTS) |
+    | **Detalles del proyecto** | **Grupo de recursos** | Selecciona o crea un nuevo grupo de recursos |
+    | **Detalles de instancia** | **Nombre** | Escriba un nombre único para la aplicación web |
+    | **Detalles de instancia** | **Pila en tiempo de ejecución** | .NET 8 (LTS) |
+    | **Detalles de instancia** | **Región** | Selecciona la región donde quieres hospedar tu aplicación web |
+    | **Panes de tarifa** | **Plan de precios** | Básico |
     | **Base de datos** | **Engine** | SQLAzure |
     | **Base de datos** | **Nombre del servidor** | Escribe un nombre único para tu SQL Server |
     | **Base de datos** | **Nombre de la base de datos** | Escribe un nombre único para tu base de datos |
-    | **Hospedar aplicaciones de WPF** | **Plan de hospedaje** | Básico |
+    
 
     > **Nota:** en el caso de las cargas de trabajo de producción, selecciona **Estándar: aplicaciones de producción de uso general**. El nombre de usuario y la contraseña de la nueva base de datos se generan automáticamente. Para recuperar estos valores después de la implementación, ve a las **Cadenas de conexión** ubicadas en la página **Variables de entorno** de tu aplicación. 
 
-1. Seleccione **Revisar y crear** y, a continuación, **Crear**. La implementación puede tardar unos minutos en completarse.
-1. Conéctate a tu base de datos en Azure Data Studio y ejecuta el siguiente código.
+1. Selecciona **Revisar y crear** y, a continuación, **Crear**. La implementación puede tardar unos minutos en completarse.
+1. Conéctate a la base de datos en SSMS y ejecuta el código siguiente:
 
+    >**Sugerencia**: Para obtener el identificador de usuario y la contraseña asignados al servidor, comprueba la cadena de conexión en la página Conector de servicio del recurso de aplicación web.
+ 
     ```sql
     CREATE TABLE Products (
         ProductID INT PRIMARY KEY,
@@ -75,7 +79,7 @@ Después, agregarás el acceso de tu cuenta a la base de datos. Esto es necesari
 1. Busca tu cuenta y selecciónala.
 1. Seleccione **Guardar**.
 
-## Habilitación de una entidad administrada
+## Habilitar una entidad administrada
 
 Después, habilitarás la identidad administrada asignada por el sistema para tu aplicación web de Azure, que es un procedimiento recomendado de seguridad que permite la administración automatizada de credenciales.
 
@@ -85,7 +89,7 @@ Después, habilitarás la identidad administrada asignada por el sistema para tu
 
 ## Concesión de acceso a Azure SQL Database
 
-1. Conexión a Azure SQL Database mediante Azure Data Studio. Selecciona **Microsoft Entra ID: universal con compatibilidad MFA** y proporciona tu nombre de usuario.
+1. Vuelve a conectarte a la base de datos de Azure SQL mediante SSMS. Selecciona **MFA de Microsoft Entra** y proporciona el nombre de usuario.
 1. Selecciona la base de datos y abre un nuevo editor de consultas.
 1. Ejecuta los siguientes comandos SQL para crear un usuario para la identidad administrada y asignar los permisos necesarios. Edita el script al proporcionar el nombre de la aplicación web.
 
@@ -105,14 +109,14 @@ Después, crearás una aplicación ASP.NET que use Entity Framework Core con Azu
 1. Abre el terminal y ejecuta el siguiente comando para crear tu nuevo proyecto de MVC.
     
     ```dos
-        dotnet new mvc
+   dotnet new mvc
     ```
     Esto creará un nuevo proyecto ASP.NET MVC en la carpeta que has elegido y lo cargará en Visual Studio Code.
 
 1. Ejecuta el siguiente comando para ejecutar tu aplicación. 
 
     ```dos
-    dotnet run
+   dotnet run
     ```
 1. El terminal genera *Escuchando: http://localhost:<port>*. Ve a la dirección URL en tu explorador para acceder a la aplicación. 
 
@@ -196,6 +200,8 @@ Después, actualizarás algunas configuraciones que te permitirán conectarte co
         return View(data);
     }
     ```
+
+1. Agrega también `using.<app name>.Database` a la parte superior del archivo.
 1. En la carpeta **Vistas -> Inicio** de tu proyecto, actualiza el archivo **Index.cshtml**, y agrega el siguiente código.
 
     ```html
