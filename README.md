@@ -1,3 +1,5 @@
+**⚠️ This GitHub repo will retire on 28th November 2025.** 
+
 # Desarrollo de Azure SQL
 
 Este repositorio contiene archivos de ejercicios para los contenidos de Microsoft Learn e ILT.
